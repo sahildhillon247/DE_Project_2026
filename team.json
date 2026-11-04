@@ -1,0 +1,27 @@
+{
+  "team_number": "T0139",
+  "group_lead": {
+    "name": "Mradusha Sharma",
+    "enrollment_no": "2501010281",
+    "github": "mradusha9"
+  },
+  "members": [
+    {
+      "name": "Sahil Dhillon",
+      "enrollment_no": "2501010393",
+      "github": "sahildhillon247"
+    },
+    {
+      "name": "Tanishka Singh",
+      "enrollment_no": "2501010472",
+      "github": "tanishka-777"
+    },
+    {
+      "name": "Raj Sharma",
+      "enrollment_no": "2501010365",
+      "github": "rajs25365"
+    }
+  ],
+  "postgres_version": "18",
+  "laptop_used_for_benchmarks": "MacBook M4 Pro"
+}
