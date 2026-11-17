@@ -1,0 +1,36 @@
+=== W04 run 1 ===
+Update on properties  (cost=0.29..1475.66 rows=0 width=0) (actual time=572.770..572.771 rows=0.00 loops=1)
+  Buffers: shared hit=353471 read=1144 dirtied=4955 written=1108
+  ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.29..1475.66 rows=28589 width=124) (actual time=0.011..3.267 rows=14440.00 loops=1)
+        Index Cond: (posted_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '120 days'::interval))
+        Filter: ((status)::text = 'ACTIVE'::text)
+        Index Searches: 1
+        Buffers: shared hit=1948
+Planning:
+  Buffers: shared hit=240
+Planning Time: 0.414 ms
+Execution Time: 572.813 ms
+=== W04 run 2 ===
+Update on properties  (cost=0.29..1650.03 rows=0 width=0) (actual time=286.074..286.074 rows=0.00 loops=1)
+  Buffers: shared hit=365828 dirtied=843 written=841
+  ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.29..1650.03 rows=32024 width=124) (actual time=0.013..4.318 rows=14440.00 loops=1)
+        Index Cond: (posted_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '120 days'::interval))
+        Filter: ((status)::text = 'ACTIVE'::text)
+        Index Searches: 1
+        Buffers: shared hit=1948
+Planning:
+  Buffers: shared hit=240
+Planning Time: 0.491 ms
+Execution Time: 286.124 ms
+=== W04 run 3 ===
+Update on properties  (cost=0.29..1827.40 rows=0 width=0) (actual time=177.643..177.643 rows=0.00 loops=1)
+  Buffers: shared hit=364071 dirtied=445 written=445
+  ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.29..1827.40 rows=35459 width=124) (actual time=0.014..4.348 rows=14440.00 loops=1)
+        Index Cond: (posted_at < ('2026-07-01 00:00:00+05:30'::timestamp with time zone - '120 days'::interval))
+        Filter: ((status)::text = 'ACTIVE'::text)
+        Index Searches: 1
+        Buffers: shared hit=1948
+Planning:
+  Buffers: shared hit=240
+Planning Time: 0.449 ms
+Execution Time: 177.687 ms

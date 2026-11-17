@@ -1,0 +1,66 @@
+=== W02 run 1 ===
+Update on properties  (cost=12.74..20.76 rows=0 width=0) (actual time=0.761..0.761 rows=0.00 loops=1)
+  Buffers: shared hit=82 read=4 dirtied=8
+  InitPlan 1
+    ->  Aggregate  (cost=12.31..12.32 rows=1 width=4) (actual time=0.025..0.026 rows=1.00 loops=1)
+          Buffers: shared hit=8
+          ->  Bitmap Heap Scan on properties properties_1  (cost=4.44..12.30 rows=2 width=4) (actual time=0.016..0.023 rows=4.00 loops=1)
+                Recheck Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                Heap Blocks: exact=5
+                Buffers: shared hit=8
+                ->  Bitmap Index Scan on idx_properties_owner_status_type  (cost=0.00..4.44 rows=2 width=0) (actual time=0.010..0.010 rows=7.00 loops=1)
+                      Index Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                      Index Searches: 1
+                      Buffers: shared hit=3
+  ->  Index Scan using properties_pkey on properties  (cost=0.42..8.44 rows=1 width=22) (actual time=0.040..0.040 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=277
+Planning Time: 0.570 ms
+Execution Time: 0.989 ms
+=== W02 run 2 ===
+Update on properties  (cost=12.74..20.76 rows=0 width=0) (actual time=0.195..0.196 rows=0.00 loops=1)
+  Buffers: shared hit=88
+  InitPlan 1
+    ->  Aggregate  (cost=12.31..12.32 rows=1 width=4) (actual time=0.023..0.023 rows=1.00 loops=1)
+          Buffers: shared hit=8
+          ->  Bitmap Heap Scan on properties properties_1  (cost=4.44..12.30 rows=2 width=4) (actual time=0.013..0.022 rows=4.00 loops=1)
+                Recheck Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                Heap Blocks: exact=5
+                Buffers: shared hit=8
+                ->  Bitmap Index Scan on idx_properties_owner_status_type  (cost=0.00..4.44 rows=2 width=0) (actual time=0.008..0.008 rows=8.00 loops=1)
+                      Index Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                      Index Searches: 1
+                      Buffers: shared hit=3
+  ->  Index Scan using properties_pkey on properties  (cost=0.42..8.44 rows=1 width=22) (actual time=0.034..0.035 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=14
+Planning:
+  Buffers: shared hit=277
+Planning Time: 0.560 ms
+Execution Time: 0.257 ms
+=== W02 run 3 ===
+Update on properties  (cost=12.74..20.76 rows=0 width=0) (actual time=0.200..0.200 rows=0.00 loops=1)
+  Buffers: shared hit=88
+  InitPlan 1
+    ->  Aggregate  (cost=12.31..12.32 rows=1 width=4) (actual time=0.021..0.021 rows=1.00 loops=1)
+          Buffers: shared hit=8
+          ->  Bitmap Heap Scan on properties properties_1  (cost=4.44..12.30 rows=2 width=4) (actual time=0.012..0.020 rows=4.00 loops=1)
+                Recheck Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                Heap Blocks: exact=5
+                Buffers: shared hit=8
+                ->  Bitmap Index Scan on idx_properties_owner_status_type  (cost=0.00..4.44 rows=2 width=0) (actual time=0.008..0.008 rows=9.00 loops=1)
+                      Index Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                      Index Searches: 1
+                      Buffers: shared hit=3
+  ->  Index Scan using properties_pkey on properties  (cost=0.42..8.44 rows=1 width=22) (actual time=0.031..0.032 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=14
+Planning:
+  Buffers: shared hit=277
+Planning Time: 0.542 ms
+Execution Time: 0.257 ms

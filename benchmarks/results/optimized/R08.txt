@@ -1,0 +1,84 @@
+=== R08 run 1 ===
+Sort  (cost=2092.43..2092.76 rows=132 width=48) (actual time=6.397..6.411 rows=559.00 loops=1)
+  Sort Key: (round(('100'::numeric * ('1'::numeric - (c.new_price / c.old_price))), 1)) DESC
+  Sort Method: quicksort  Memory: 48kB
+  Buffers: shared hit=2569 read=81
+  ->  Hash Join  (cost=241.97..2087.78 rows=132 width=48) (actual time=4.794..6.288 rows=559.00 loops=1)
+        Hash Cond: (p.property_id = c.property_id)
+        Buffers: shared hit=2566 read=81
+        ->  Index Scan using idx_properties_active_posted_at on properties p  (cost=0.29..1705.73 rows=36730 width=4) (actual time=0.004..4.083 rows=36819.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2544 read=74
+        ->  Hash  (cost=236.28..236.28 rows=432 width=16) (actual time=0.841..0.842 rows=658.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 40kB
+              Buffers: shared hit=22 read=7
+              ->  Bitmap Heap Scan on price_changes c  (cost=37.36..236.28 rows=432 width=16) (actual time=0.684..0.808 rows=658.00 loops=1)
+                    Recheck Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Filter: (new_price <= (old_price * 0.9))
+                    Rows Removed by Filter: 639
+                    Heap Blocks: exact=22
+                    Buffers: shared hit=22 read=7
+                    ->  Bitmap Index Scan on idx_price_changes_changed_at  (cost=0.00..37.25 rows=1296 width=0) (actual time=0.674..0.674 rows=1297.00 loops=1)
+                          Index Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared read=7
+Planning:
+  Buffers: shared hit=427 read=1
+Planning Time: 0.792 ms
+Execution Time: 6.442 ms
+=== R08 run 2 ===
+Sort  (cost=2092.43..2092.76 rows=132 width=48) (actual time=5.334..5.345 rows=559.00 loops=1)
+  Sort Key: (round(('100'::numeric * ('1'::numeric - (c.new_price / c.old_price))), 1)) DESC
+  Sort Method: quicksort  Memory: 48kB
+  Buffers: shared hit=2650
+  ->  Hash Join  (cost=241.97..2087.78 rows=132 width=48) (actual time=3.887..5.235 rows=559.00 loops=1)
+        Hash Cond: (p.property_id = c.property_id)
+        Buffers: shared hit=2647
+        ->  Index Scan using idx_properties_active_posted_at on properties p  (cost=0.29..1705.73 rows=36730 width=4) (actual time=0.004..3.714 rows=36819.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2618
+        ->  Hash  (cost=236.28..236.28 rows=432 width=16) (actual time=0.218..0.219 rows=658.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 40kB
+              Buffers: shared hit=29
+              ->  Bitmap Heap Scan on price_changes c  (cost=37.36..236.28 rows=432 width=16) (actual time=0.041..0.179 rows=658.00 loops=1)
+                    Recheck Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Filter: (new_price <= (old_price * 0.9))
+                    Rows Removed by Filter: 639
+                    Heap Blocks: exact=22
+                    Buffers: shared hit=29
+                    ->  Bitmap Index Scan on idx_price_changes_changed_at  (cost=0.00..37.25 rows=1296 width=0) (actual time=0.031..0.031 rows=1297.00 loops=1)
+                          Index Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=428
+Planning Time: 0.662 ms
+Execution Time: 5.376 ms
+=== R08 run 3 ===
+Sort  (cost=2092.43..2092.76 rows=132 width=48) (actual time=5.287..5.298 rows=559.00 loops=1)
+  Sort Key: (round(('100'::numeric * ('1'::numeric - (c.new_price / c.old_price))), 1)) DESC
+  Sort Method: quicksort  Memory: 48kB
+  Buffers: shared hit=2650
+  ->  Hash Join  (cost=241.97..2087.78 rows=132 width=48) (actual time=3.809..5.187 rows=559.00 loops=1)
+        Hash Cond: (p.property_id = c.property_id)
+        Buffers: shared hit=2647
+        ->  Index Scan using idx_properties_active_posted_at on properties p  (cost=0.29..1705.73 rows=36730 width=4) (actual time=0.004..3.682 rows=36819.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2618
+        ->  Hash  (cost=236.28..236.28 rows=432 width=16) (actual time=0.205..0.205 rows=658.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 40kB
+              Buffers: shared hit=29
+              ->  Bitmap Heap Scan on price_changes c  (cost=37.36..236.28 rows=432 width=16) (actual time=0.033..0.169 rows=658.00 loops=1)
+                    Recheck Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                    Filter: (new_price <= (old_price * 0.9))
+                    Rows Removed by Filter: 639
+                    Heap Blocks: exact=22
+                    Buffers: shared hit=29
+                    ->  Bitmap Index Scan on idx_price_changes_changed_at  (cost=0.00..37.25 rows=1296 width=0) (actual time=0.024..0.024 rows=1297.00 loops=1)
+                          Index Cond: ((changed_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (changed_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+                          Index Searches: 1
+                          Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=428
+Planning Time: 0.621 ms
+Execution Time: 5.326 ms

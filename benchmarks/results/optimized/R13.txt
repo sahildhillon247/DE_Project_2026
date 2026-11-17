@@ -1,0 +1,36 @@
+=== R13 run 1 ===
+Seq Scan on projects pj  (cost=3897.75..3934.75 rows=600 width=37) (actual time=10.896..10.896 rows=0.00 loops=1)
+  Filter: (NOT (ANY (project_id = (hashed SubPlan 1).col1)))
+  Rows Removed by Filter: 1200
+  Buffers: shared hit=2419
+  SubPlan 1
+    ->  Seq Scan on properties p  (cost=0.00..3597.60 rows=120060 width=4) (actual time=0.005..5.305 rows=120060.00 loops=1)
+          Buffers: shared hit=2397
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.521 ms
+Execution Time: 10.933 ms
+=== R13 run 2 ===
+Seq Scan on projects pj  (cost=3897.75..3934.75 rows=600 width=37) (actual time=10.791..10.792 rows=0.00 loops=1)
+  Filter: (NOT (ANY (project_id = (hashed SubPlan 1).col1)))
+  Rows Removed by Filter: 1200
+  Buffers: shared hit=2419
+  SubPlan 1
+    ->  Seq Scan on properties p  (cost=0.00..3597.60 rows=120060 width=4) (actual time=0.004..5.214 rows=120060.00 loops=1)
+          Buffers: shared hit=2397
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.466 ms
+Execution Time: 10.823 ms
+=== R13 run 3 ===
+Seq Scan on projects pj  (cost=3897.75..3934.75 rows=600 width=37) (actual time=10.242..10.243 rows=0.00 loops=1)
+  Filter: (NOT (ANY (project_id = (hashed SubPlan 1).col1)))
+  Rows Removed by Filter: 1200
+  Buffers: shared hit=2419
+  SubPlan 1
+    ->  Seq Scan on properties p  (cost=0.00..3597.60 rows=120060 width=4) (actual time=0.004..5.037 rows=120060.00 loops=1)
+          Buffers: shared hit=2397
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.448 ms
+Execution Time: 10.273 ms

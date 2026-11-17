@@ -1,0 +1,84 @@
+=== R20 run 1 ===
+WindowAgg  (cost=3943.97..4033.20 rows=600 width=44) (actual time=4.798..5.299 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((properties.posted_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=190 read=220
+  ->  GroupAggregate  (cost=3943.82..4024.20 rows=600 width=12) (actual time=4.769..5.279 rows=30.00 loops=1)
+        Group Key: ((properties.posted_at)::date)
+        Buffers: shared hit=190 read=220
+        ->  Gather Merge  (cost=3943.82..4013.70 rows=600 width=4) (actual time=4.748..5.118 rows=6600.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=190 read=220
+              ->  Sort  (cost=2943.80..2944.42 rows=250 width=4) (actual time=2.947..2.988 rows=2200.00 loops=3)
+                    Sort Key: ((properties.posted_at)::date)
+                    Sort Method: quicksort  Memory: 193kB
+                    Buffers: shared hit=190 read=220
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Parallel Index Only Scan using idx_properties_posted_at_desc on properties  (cost=0.42..2933.84 rows=250 width=4) (actual time=1.377..2.861 rows=2200.00 loops=3)
+                          Filter: (((posted_at)::date >= '2026-06-01'::date) AND ((posted_at)::date <= '2026-06-30'::date))
+                          Rows Removed by Filter: 37820
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=114 read=220
+Planning:
+  Buffers: shared hit=271
+Planning Time: 0.468 ms
+Execution Time: 5.338 ms
+=== R20 run 2 ===
+WindowAgg  (cost=3943.97..4033.20 rows=600 width=44) (actual time=3.784..4.266 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((properties.posted_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=410
+  ->  GroupAggregate  (cost=3943.82..4024.20 rows=600 width=12) (actual time=3.754..4.246 rows=30.00 loops=1)
+        Group Key: ((properties.posted_at)::date)
+        Buffers: shared hit=410
+        ->  Gather Merge  (cost=3943.82..4013.70 rows=600 width=4) (actual time=3.734..4.081 rows=6600.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=410
+              ->  Sort  (cost=2943.80..2944.42 rows=250 width=4) (actual time=2.368..2.408 rows=2200.00 loops=3)
+                    Sort Key: ((properties.posted_at)::date)
+                    Sort Method: quicksort  Memory: 193kB
+                    Buffers: shared hit=410
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Parallel Index Only Scan using idx_properties_posted_at_desc on properties  (cost=0.42..2933.84 rows=250 width=4) (actual time=1.138..2.273 rows=2200.00 loops=3)
+                          Filter: (((posted_at)::date >= '2026-06-01'::date) AND ((posted_at)::date <= '2026-06-30'::date))
+                          Rows Removed by Filter: 37820
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=334
+Planning:
+  Buffers: shared hit=271
+Planning Time: 0.394 ms
+Execution Time: 4.304 ms
+=== R20 run 3 ===
+WindowAgg  (cost=3943.97..4033.20 rows=600 width=44) (actual time=3.508..3.994 rows=30.00 loops=1)
+  Window: w1 AS (ORDER BY ((properties.posted_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=410
+  ->  GroupAggregate  (cost=3943.82..4024.20 rows=600 width=12) (actual time=3.480..3.976 rows=30.00 loops=1)
+        Group Key: ((properties.posted_at)::date)
+        Buffers: shared hit=410
+        ->  Gather Merge  (cost=3943.82..4013.70 rows=600 width=4) (actual time=3.459..3.815 rows=6600.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=410
+              ->  Sort  (cost=2943.80..2944.42 rows=250 width=4) (actual time=2.141..2.182 rows=2200.00 loops=3)
+                    Sort Key: ((properties.posted_at)::date)
+                    Sort Method: quicksort  Memory: 193kB
+                    Buffers: shared hit=410
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Parallel Index Only Scan using idx_properties_posted_at_desc on properties  (cost=0.42..2933.84 rows=250 width=4) (actual time=1.002..2.052 rows=2200.00 loops=3)
+                          Filter: (((posted_at)::date >= '2026-06-01'::date) AND ((posted_at)::date <= '2026-06-30'::date))
+                          Rows Removed by Filter: 37820
+                          Heap Fetches: 0
+                          Index Searches: 1
+                          Buffers: shared hit=334
+Planning:
+  Buffers: shared hit=271
+Planning Time: 0.412 ms
+Execution Time: 4.032 ms

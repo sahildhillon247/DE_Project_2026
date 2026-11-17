@@ -1,0 +1,54 @@
+=== R18 run 1 ===
+Sort  (cost=2635.35..2645.10 rows=3898 width=29) (actual time=10.558..10.559 rows=60.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 27kB
+  Buffers: shared hit=2621
+  ->  HashAggregate  (cost=2256.68..2402.86 rows=3898 width=29) (actual time=8.890..10.545 rows=60.00 loops=1)
+        Group Key: listed_by, locality_id, carpet_area_sqft, floor_no, bhk
+        Filter: (count(*) > 1)
+        Batches: 1  Memory Usage: 3097kB
+        Rows Removed by Filter: 36699
+        Buffers: shared hit=2618
+        ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.29..1705.73 rows=36730 width=21) (actual time=0.005..3.699 rows=36819.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2618
+Planning:
+  Buffers: shared hit=321
+Planning Time: 0.447 ms
+Execution Time: 10.611 ms
+=== R18 run 2 ===
+Sort  (cost=2635.35..2645.10 rows=3898 width=29) (actual time=10.424..10.425 rows=60.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 27kB
+  Buffers: shared hit=2621
+  ->  HashAggregate  (cost=2256.68..2402.86 rows=3898 width=29) (actual time=8.731..10.413 rows=60.00 loops=1)
+        Group Key: listed_by, locality_id, carpet_area_sqft, floor_no, bhk
+        Filter: (count(*) > 1)
+        Batches: 1  Memory Usage: 3097kB
+        Rows Removed by Filter: 36699
+        Buffers: shared hit=2618
+        ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.29..1705.73 rows=36730 width=21) (actual time=0.006..3.517 rows=36819.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2618
+Planning:
+  Buffers: shared hit=321
+Planning Time: 0.490 ms
+Execution Time: 10.477 ms
+=== R18 run 3 ===
+Sort  (cost=2635.35..2645.10 rows=3898 width=29) (actual time=10.130..10.131 rows=60.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 27kB
+  Buffers: shared hit=2621
+  ->  HashAggregate  (cost=2256.68..2402.86 rows=3898 width=29) (actual time=8.515..10.119 rows=60.00 loops=1)
+        Group Key: listed_by, locality_id, carpet_area_sqft, floor_no, bhk
+        Filter: (count(*) > 1)
+        Batches: 1  Memory Usage: 3097kB
+        Rows Removed by Filter: 36699
+        Buffers: shared hit=2618
+        ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.29..1705.73 rows=36730 width=21) (actual time=0.005..3.475 rows=36819.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2618
+Planning:
+  Buffers: shared hit=321
+Planning Time: 0.428 ms
+Execution Time: 10.210 ms

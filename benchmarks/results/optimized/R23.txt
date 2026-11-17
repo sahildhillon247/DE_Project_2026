@@ -1,0 +1,27 @@
+=== R23 run 1 ===
+Index Scan using idx_users_phone on users  (cost=0.29..8.31 rows=1 width=22) (actual time=0.304..0.305 rows=1.00 loops=1)
+  Index Cond: ((phone)::text = '9600001042'::text)
+  Index Searches: 1
+  Buffers: shared hit=1 read=2
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.168 ms
+Execution Time: 0.320 ms
+=== R23 run 2 ===
+Index Scan using idx_users_phone on users  (cost=0.29..8.31 rows=1 width=22) (actual time=0.008..0.008 rows=1.00 loops=1)
+  Index Cond: ((phone)::text = '9600001042'::text)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.180 ms
+Execution Time: 0.024 ms
+=== R23 run 3 ===
+Index Scan using idx_users_phone on users  (cost=0.29..8.31 rows=1 width=22) (actual time=0.009..0.009 rows=1.00 loops=1)
+  Index Cond: ((phone)::text = '9600001042'::text)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.178 ms
+Execution Time: 0.024 ms

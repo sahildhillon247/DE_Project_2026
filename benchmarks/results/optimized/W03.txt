@@ -1,0 +1,24 @@
+=== W03 run 1 ===
+Insert on site_visits  (cost=0.00..0.01 rows=0 width=0) (actual time=0.868..0.869 rows=0.00 loops=1)
+  Buffers: shared hit=78 read=2 dirtied=4
+  ->  Result  (cost=0.00..0.01 rows=1 width=142) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning Time: 0.033 ms
+Trigger for constraint site_visits_property_id_fkey: time=0.544 calls=1
+Trigger for constraint site_visits_user_id_fkey: time=0.156 calls=1
+Execution Time: 1.578 ms
+=== W03 run 2 ===
+Insert on site_visits  (cost=0.00..0.01 rows=0 width=0) (actual time=0.135..0.135 rows=0.00 loops=1)
+  Buffers: shared hit=81
+  ->  Result  (cost=0.00..0.01 rows=1 width=142) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning Time: 0.033 ms
+Trigger for constraint site_visits_property_id_fkey: time=0.481 calls=1
+Trigger for constraint site_visits_user_id_fkey: time=0.133 calls=1
+Execution Time: 0.759 ms
+=== W03 run 3 ===
+Insert on site_visits  (cost=0.00..0.01 rows=0 width=0) (actual time=0.117..0.117 rows=0.00 loops=1)
+  Buffers: shared hit=81
+  ->  Result  (cost=0.00..0.01 rows=1 width=142) (actual time=0.002..0.002 rows=1.00 loops=1)
+Planning Time: 0.032 ms
+Trigger for constraint site_visits_property_id_fkey: time=0.464 calls=1
+Trigger for constraint site_visits_user_id_fkey: time=0.121 calls=1
+Execution Time: 0.711 ms

@@ -1,0 +1,93 @@
+=== R07 run 1 ===
+Sort  (cost=131.71..131.72 rows=1 width=39) (actual time=1.147..1.148 rows=2.00 loops=1)
+  Sort Key: v.scheduled_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=59 read=12
+  ->  Nested Loop  (cost=4.95..131.70 rows=1 width=39) (actual time=0.803..1.137 rows=2.00 loops=1)
+        Buffers: shared hit=56 read=12
+        ->  Nested Loop  (cost=4.66..125.78 rows=1 width=20) (actual time=0.796..1.125 rows=2.00 loops=1)
+              Buffers: shared hit=50 read=12
+              ->  Bitmap Heap Scan on properties p  (cost=4.37..42.56 rows=10 width=4) (actual time=0.114..0.142 rows=17.00 loops=1)
+                    Recheck Cond: (listed_by = 4723)
+                    Heap Blocks: exact=17
+                    Buffers: shared hit=18 read=1
+                    ->  Bitmap Index Scan on idx_properties_listed_by  (cost=0.00..4.37 rows=10 width=0) (actual time=0.107..0.107 rows=17.00 loops=1)
+                          Index Cond: (listed_by = 4723)
+                          Index Searches: 1
+                          Buffers: shared hit=1 read=1
+              ->  Index Scan using idx_site_visits_property_user on site_visits v  (cost=0.29..8.31 rows=1 width=20) (actual time=0.058..0.058 rows=0.12 loops=17)
+                    Index Cond: (property_id = p.property_id)
+                    Filter: (date(scheduled_at) = '2026-07-01'::date)
+                    Rows Removed by Filter: 0
+                    Index Searches: 17
+                    Buffers: shared hit=32 read=11
+        ->  Index Scan using users_pkey on users u  (cost=0.29..5.92 rows=1 width=27) (actual time=0.006..0.006 rows=1.00 loops=2)
+              Index Cond: (user_id = v.user_id)
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=481 read=1
+Planning Time: 1.317 ms
+Execution Time: 1.179 ms
+=== R07 run 2 ===
+Sort  (cost=131.71..131.72 rows=1 width=39) (actual time=0.097..0.097 rows=2.00 loops=1)
+  Sort Key: v.scheduled_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=71
+  ->  Nested Loop  (cost=4.95..131.70 rows=1 width=39) (actual time=0.066..0.086 rows=2.00 loops=1)
+        Buffers: shared hit=68
+        ->  Nested Loop  (cost=4.66..125.78 rows=1 width=20) (actual time=0.060..0.076 rows=2.00 loops=1)
+              Buffers: shared hit=62
+              ->  Bitmap Heap Scan on properties p  (cost=4.37..42.56 rows=10 width=4) (actual time=0.009..0.033 rows=17.00 loops=1)
+                    Recheck Cond: (listed_by = 4723)
+                    Heap Blocks: exact=17
+                    Buffers: shared hit=19
+                    ->  Bitmap Index Scan on idx_properties_listed_by  (cost=0.00..4.37 rows=10 width=0) (actual time=0.004..0.004 rows=17.00 loops=1)
+                          Index Cond: (listed_by = 4723)
+                          Index Searches: 1
+                          Buffers: shared hit=2
+              ->  Index Scan using idx_site_visits_property_user on site_visits v  (cost=0.29..8.31 rows=1 width=20) (actual time=0.002..0.002 rows=0.12 loops=17)
+                    Index Cond: (property_id = p.property_id)
+                    Filter: (date(scheduled_at) = '2026-07-01'::date)
+                    Rows Removed by Filter: 0
+                    Index Searches: 17
+                    Buffers: shared hit=43
+        ->  Index Scan using users_pkey on users u  (cost=0.29..5.92 rows=1 width=27) (actual time=0.005..0.005 rows=1.00 loops=2)
+              Index Cond: (user_id = v.user_id)
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=482
+Planning Time: 0.864 ms
+Execution Time: 0.131 ms
+=== R07 run 3 ===
+Sort  (cost=131.71..131.72 rows=1 width=39) (actual time=0.083..0.083 rows=2.00 loops=1)
+  Sort Key: v.scheduled_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=71
+  ->  Nested Loop  (cost=4.95..131.70 rows=1 width=39) (actual time=0.058..0.074 rows=2.00 loops=1)
+        Buffers: shared hit=68
+        ->  Nested Loop  (cost=4.66..125.78 rows=1 width=20) (actual time=0.052..0.065 rows=2.00 loops=1)
+              Buffers: shared hit=62
+              ->  Bitmap Heap Scan on properties p  (cost=4.37..42.56 rows=10 width=4) (actual time=0.007..0.028 rows=17.00 loops=1)
+                    Recheck Cond: (listed_by = 4723)
+                    Heap Blocks: exact=17
+                    Buffers: shared hit=19
+                    ->  Bitmap Index Scan on idx_properties_listed_by  (cost=0.00..4.37 rows=10 width=0) (actual time=0.004..0.004 rows=17.00 loops=1)
+                          Index Cond: (listed_by = 4723)
+                          Index Searches: 1
+                          Buffers: shared hit=2
+              ->  Index Scan using idx_site_visits_property_user on site_visits v  (cost=0.29..8.31 rows=1 width=20) (actual time=0.002..0.002 rows=0.12 loops=17)
+                    Index Cond: (property_id = p.property_id)
+                    Filter: (date(scheduled_at) = '2026-07-01'::date)
+                    Rows Removed by Filter: 0
+                    Index Searches: 17
+                    Buffers: shared hit=43
+        ->  Index Scan using users_pkey on users u  (cost=0.29..5.92 rows=1 width=27) (actual time=0.004..0.004 rows=1.00 loops=2)
+              Index Cond: (user_id = v.user_id)
+              Index Searches: 2
+              Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=482
+Planning Time: 0.755 ms
+Execution Time: 0.111 ms
