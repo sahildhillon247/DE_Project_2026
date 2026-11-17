@@ -1,0 +1,27 @@
+=== R23 run 1 ===
+Seq Scan on users  (cost=0.00..964.00 rows=1 width=22) (actual time=0.042..1.328 rows=1.00 loops=1)
+  Filter: ((phone)::text = '9600001042'::text)
+  Rows Removed by Filter: 39999
+  Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=69
+Planning Time: 0.141 ms
+Execution Time: 1.342 ms
+=== R23 run 2 ===
+Seq Scan on users  (cost=0.00..964.00 rows=1 width=22) (actual time=0.039..1.307 rows=1.00 loops=1)
+  Filter: ((phone)::text = '9600001042'::text)
+  Rows Removed by Filter: 39999
+  Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=69
+Planning Time: 0.136 ms
+Execution Time: 1.321 ms
+=== R23 run 3 ===
+Seq Scan on users  (cost=0.00..964.00 rows=1 width=22) (actual time=0.039..1.320 rows=1.00 loops=1)
+  Filter: ((phone)::text = '9600001042'::text)
+  Rows Removed by Filter: 39999
+  Buffers: shared hit=464
+Planning:
+  Buffers: shared hit=69
+Planning Time: 0.130 ms
+Execution Time: 1.333 ms

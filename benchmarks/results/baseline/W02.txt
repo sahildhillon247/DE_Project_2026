@@ -1,0 +1,66 @@
+=== W02 run 1 ===
+Update on properties  (cost=1077.99..1086.01 rows=0 width=0) (actual time=0.521..0.522 rows=0.00 loops=1)
+  Buffers: shared hit=132 dirtied=3
+  InitPlan 2
+    ->  Result  (cost=1077.69..1077.70 rows=1 width=4) (actual time=0.337..0.337 rows=1.00 loops=1)
+          Buffers: shared hit=76
+          InitPlan 1
+            ->  Limit  (cost=0.29..1077.69 rows=1 width=4) (actual time=0.336..0.336 rows=1.00 loops=1)
+                  Buffers: shared hit=76
+                  ->  Index Scan Backward using properties_pkey on properties properties_1  (cost=0.29..6464.66 rows=6 width=4) (actual time=0.336..0.336 rows=1.00 loops=1)
+                        Filter: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                        Rows Removed by Filter: 3150
+                        Index Searches: 1
+                        Buffers: shared hit=76
+  ->  Index Scan using properties_pkey on properties  (cost=0.29..8.32 rows=1 width=22) (actual time=0.345..0.346 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 2).col1)
+        Index Searches: 1
+        Buffers: shared hit=79
+Planning:
+  Buffers: shared hit=94
+Planning Time: 0.216 ms
+Execution Time: 0.738 ms
+=== W02 run 2 ===
+Update on properties  (cost=1077.99..1086.01 rows=0 width=0) (actual time=0.483..0.483 rows=0.00 loops=1)
+  Buffers: shared hit=134 dirtied=1
+  InitPlan 2
+    ->  Result  (cost=1077.69..1077.70 rows=1 width=4) (actual time=0.332..0.332 rows=1.00 loops=1)
+          Buffers: shared hit=76
+          InitPlan 1
+            ->  Limit  (cost=0.29..1077.69 rows=1 width=4) (actual time=0.331..0.331 rows=1.00 loops=1)
+                  Buffers: shared hit=76
+                  ->  Index Scan Backward using properties_pkey on properties properties_1  (cost=0.29..6464.66 rows=6 width=4) (actual time=0.330..0.330 rows=1.00 loops=1)
+                        Filter: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                        Rows Removed by Filter: 3150
+                        Index Searches: 1
+                        Buffers: shared hit=76
+  ->  Index Scan using properties_pkey on properties  (cost=0.29..8.32 rows=1 width=22) (actual time=0.339..0.340 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 2).col1)
+        Index Searches: 1
+        Buffers: shared hit=81
+Planning:
+  Buffers: shared hit=94
+Planning Time: 0.204 ms
+Execution Time: 0.538 ms
+=== W02 run 3 ===
+Update on properties  (cost=1077.99..1086.01 rows=0 width=0) (actual time=0.455..0.455 rows=0.00 loops=1)
+  Buffers: shared hit=134 dirtied=1
+  InitPlan 2
+    ->  Result  (cost=1077.69..1077.70 rows=1 width=4) (actual time=0.319..0.319 rows=1.00 loops=1)
+          Buffers: shared hit=76
+          InitPlan 1
+            ->  Limit  (cost=0.29..1077.69 rows=1 width=4) (actual time=0.318..0.319 rows=1.00 loops=1)
+                  Buffers: shared hit=76
+                  ->  Index Scan Backward using properties_pkey on properties properties_1  (cost=0.29..6464.66 rows=6 width=4) (actual time=0.318..0.318 rows=1.00 loops=1)
+                        Filter: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                        Rows Removed by Filter: 3150
+                        Index Searches: 1
+                        Buffers: shared hit=76
+  ->  Index Scan using properties_pkey on properties  (cost=0.29..8.32 rows=1 width=22) (actual time=0.326..0.327 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 2).col1)
+        Index Searches: 1
+        Buffers: shared hit=81
+Planning:
+  Buffers: shared hit=94
+Planning Time: 0.184 ms
+Execution Time: 0.509 ms

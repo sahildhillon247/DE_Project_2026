@@ -1,0 +1,45 @@
+=== R05 run 1 ===
+Limit  (cost=1000.00..5214.09 rows=85 width=30) (actual time=0.101..7.137 rows=200.00 loops=1)
+  Buffers: shared hit=1958
+  ->  Gather  (cost=1000.00..5214.09 rows=85 width=30) (actual time=0.101..7.128 rows=200.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1958
+        ->  Parallel Seq Scan on properties  (cost=0.00..4205.59 rows=50 width=30) (actual time=0.022..5.520 rows=182.50 loops=2)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text) AND ((status)::text = 'ACTIVE'::text))
+              Rows Removed by Filter: 48812
+              Buffers: shared hit=1958
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.182 ms
+Execution Time: 7.152 ms
+=== R05 run 2 ===
+Limit  (cost=1000.00..5214.09 rows=85 width=30) (actual time=0.190..8.360 rows=200.00 loops=1)
+  Buffers: shared hit=1941
+  ->  Gather  (cost=1000.00..5214.09 rows=85 width=30) (actual time=0.190..8.350 rows=200.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1941
+        ->  Parallel Seq Scan on properties  (cost=0.00..4205.59 rows=50 width=30) (actual time=0.124..6.365 rows=177.00 loops=2)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text) AND ((status)::text = 'ACTIVE'::text))
+              Rows Removed by Filter: 48399
+              Buffers: shared hit=1941
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.176 ms
+Execution Time: 8.385 ms
+=== R05 run 3 ===
+Limit  (cost=1000.00..5214.09 rows=85 width=30) (actual time=0.111..6.314 rows=200.00 loops=1)
+  Buffers: shared hit=1935
+  ->  Gather  (cost=1000.00..5214.09 rows=85 width=30) (actual time=0.110..6.307 rows=200.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=1935
+        ->  Parallel Seq Scan on properties  (cost=0.00..4205.59 rows=50 width=30) (actual time=0.034..4.890 rows=173.50 loops=2)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text) AND ((status)::text = 'ACTIVE'::text))
+              Rows Removed by Filter: 48257
+              Buffers: shared hit=1935
+Planning:
+  Buffers: shared hit=88
+Planning Time: 0.186 ms
+Execution Time: 6.331 ms
