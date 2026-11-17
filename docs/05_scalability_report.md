@@ -105,7 +105,7 @@ The faculty dataset is expected on 19 November 2026. After release:
 
 1. Create a separate database for the large dataset.
 2. Execute `sql/01_schema.sql`.
-3. Load the supplied `large_data/` files without committing the large CSV data to Git.
+3. From the repository root, run `psql -d <large_db_name> -v ON_ERROR_STOP=1 -f sql/03_load_large_data.sql` to load the supplied `large_data/` CSV files. Do not commit the large CSV data to Git.
 4. Execute `sql/05_indexes.sql` and run `ANALYZE`.
 5. Execute the optimized workload `sql/06_optimized_queries.sql`.
 6. Run three benchmark repetitions and preserve every raw plan under `benchmarks/results/large/`.
