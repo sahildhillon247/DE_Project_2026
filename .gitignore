@@ -1,3 +1,6 @@
 seed_data/
 large_data/
 .DS_Store
+
+# Phase 5 source dataset archive (do not commit)
+large_data.zip

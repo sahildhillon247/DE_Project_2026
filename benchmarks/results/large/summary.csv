@@ -1,31 +1,31 @@
-query_id,type,optimized_seed_ms,projected_large_ms,growth_factor,meets_target,target_ms,notes
-R01,READ,0.159,0.350,2.2x,YES,5,Selective rental-search index scales well
-R02,READ,0.391,0.978,2.5x,YES,5,Selective sale-search index scales well
-R03,READ,0.104,0.156,1.5x,YES,5,Primary-key and join indexes keep lookup fast
-R04,READ,0.805,1.610,2.0x,YES,5000,Locality/listing/status index limits scanned properties
-R05,READ,2.462,4.185,1.7x,YES,5,Partial active-listing index remains selective
-R06,READ,1.417,2.834,2.0x,YES,5,Listed-by and property/enquiry indexes reduce scan
-R07,READ,0.474,0.948,2.0x,YES,5,Indexed property and site-visit lookups
-R08,READ,5.715,17.145,3.0x,YES,250,Date indexes limit property and price-change scans
-R09,READ,2.605,5.210,2.0x,YES,250,Amenity and project/property indexes reduce candidate rows
-R10,READ,0.049,0.074,1.5x,YES,5,Unique RERA lookup remains constant-time
-R11,READ,0.250,0.500,2.0x,YES,5,Selective property index keeps result set small
-R12,READ,4.949,14.847,3.0x,YES,250,Date index limits enquiry processing
-R13,READ,10.676,213.520,20.0x,YES,250,Sequential project/property processing grows with dataset size
-R14,READ,7.191,10.787,1.5x,YES,5000,Posted-at index keeps latest-property lookup bounded
-R15,READ,10.898,217.960,20.0x,YES,5000,Property/locality scan grows with property volume
-R16,READ,0.469,0.704,1.5x,YES,250,Project scan remains small relative to main property tables
-R17,READ,12.472,249.440,20.0x,YES,250,Enquiry processing grows with large enquiry volume
-R18,READ,10.433,208.660,20.0x,YES,5000,Active-property processing grows with listing volume
-R19,READ,8.062,40.310,5.0x,YES,5000,Date and property indexes reduce join growth
-R20,READ,4.558,6.837,1.5x,YES,5000,Posted-at index keeps date filtering selective
-R21,READ,10.332,206.640,20.0x,YES,5000,Property/site-visit/locality scans grow with dataset size
-R22,READ,6.096,9.144,1.5x,YES,250,Posted-at index keeps pagination/filtering efficient
-R23,READ,0.123,0.148,1.2x,YES,5,Phone index provides near-constant lookup
-R24,READ,0.147,0.294,2.0x,YES,250,Small project/builder joins remain inexpensive
-R25,READ,66.195,1323.900,20.0x,YES,5000,Large sequential scans grow with properties and shortlists
-W01,WRITE,1.137,1.706,1.5x,YES,5,Insert uses normal partition/table routing with minimal index overhead
-W02,WRITE,0.501,0.752,1.5x,YES,5,Partial property index remains selective
-W03,WRITE,1.016,1.524,1.5x,YES,5,Write cost grows modestly with indexed property data
-W04,WRITE,345.541,6910.820,20.0x,NO,1000,Large bulk update becomes expensive; batching is required
-W05,WRITE,0.274,0.411,1.5x,YES,5,Selective owner/status indexes keep update lookup fast
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R01,READ,2.339,1.464,1.366,4.186,Seq Scan on localities | Bitmap Heap Scan on properties | Bitmap Index Scan on idx_properties_rent_search
+R02,READ,4.472,3.387,3.321,6.709,Seq Scan on localities | Bitmap Heap Scan on properties | Bitmap Index Scan on idx_properties_sale_search
+R03,READ,0.395,0.124,0.120,0.942,Index Scan using properties_pkey on properties | Index Scan using projects_pkey on projects | Index Scan using builders_pkey on builders | Index Only Scan using project_amenities_pkey on project_amenities | Index Scan using amenities_pkey on amenities
+R04,READ,22.408,19.882,16.982,30.360,Seq Scan on localities | Bitmap Heap Scan on properties | Bitmap Index Scan on idx_properties_locality_listing_status
+R05,READ,7.120,6.048,6.001,9.312,Index Scan using idx_properties_active_posted_at on properties
+R06,READ,1.131,0.845,0.801,1.748,Bitmap Heap Scan on properties | Bitmap Index Scan on idx_properties_listed_by | Index Scan using idx_enquiries_property_id on enquiries | Index Scan using idx_site_visits_property_user on site_visits
+R07,READ,0.460,0.375,0.329,0.677,Bitmap Heap Scan on properties | Bitmap Index Scan on idx_properties_listed_by | Index Scan using idx_site_visits_property_user on site_visits | Index Scan using users_pkey on users
+R08,READ,24.944,22.074,19.350,33.407,Bitmap Heap Scan on price_changes | Bitmap Index Scan on idx_price_changes_changed_at | Index Scan using properties_pkey on properties
+R09,READ,102.300,75.121,61.078,170.701,Seq Scan on amenities | Index Only Scan using idx_project_amenities_amenity_project on project_amenities | Index Scan using idx_properties_project_status_price on properties
+R10,READ,0.317,0.114,0.097,0.739,Seq Scan on builders | Index Scan using projects_rera_id_key on projects
+R11,READ,0.266,0.226,0.167,0.405,Bitmap Heap Scan on properties | Bitmap Index Scan on idx_properties_project_status_price
+R12,READ,136.566,126.284,120.596,162.818,Seq Scan on site_visits | Bitmap Heap Scan on enquiries | Bitmap Index Scan on idx_enquiries_created_at
+R13,READ,759891.575,806299.910,622710.830,850663.986,Seq Scan on projects | Seq Scan on properties
+R14,READ,125.495,124.436,124.154,127.895,Index Scan using idx_properties_posted_at_desc on properties | Seq Scan on users
+R15,READ,163.814,161.034,155.422,174.985,Seq Scan on properties | Seq Scan on localities
+R16,READ,16.877,16.953,16.580,17.097,Seq Scan on projects
+R17,READ,340.870,344.248,333.918,344.443,Seq Scan on enquiries | Index Scan using idx_properties_active_posted_at on properties
+R18,READ,946.856,948.857,938.370,953.341,Index Scan using idx_properties_active_posted_at on properties
+R19,READ,177.102,168.292,166.371,196.644,Index Scan using idx_properties_active_posted_at on properties | Seq Scan on localities | Index Scan using idx_enquiries_property_id on enquiries
+R20,READ,113.475,110.685,99.954,129.787,Index Only Scan using idx_properties_posted_at_desc on properties
+R21,READ,303.655,227.867,217.322,465.777,Seq Scan on properties | Seq Scan on site_visits | Seq Scan on localities
+R22,READ,12.849,12.632,12.451,13.463,Index Scan using idx_properties_posted_at_desc on properties
+R23,READ,0.200,0.045,0.043,0.511,Index Scan using idx_users_phone on users
+R24,READ,2.691,2.479,2.409,3.185,Bitmap Heap Scan on projects | Bitmap Index Scan on idx_projects_possession | Seq Scan on builders
+R25,READ,5135.005,4998.553,4987.867,5418.594,Seq Scan on shortlists | Seq Scan on properties | Seq Scan on localities | Index Only Scan using idx_enquiries_property_user on enquiries
+W01,WRITE,2.057,1.093,1.075,4.002,(no scan)
+W02,WRITE,1.061,0.490,0.485,2.207,Index Scan using idx_properties_owner_status_type on properties | Index Scan using properties_pkey on properties
+W03,WRITE,1.950,1.352,1.311,3.187,(no scan)
+W04,WRITE,35423.401,20584.275,18251.587,67434.340,Index Scan using idx_properties_active_posted_at on properties
+W05,WRITE,0.785,0.488,0.452,1.416,Index Scan using idx_properties_owner_status_type on properties | Index Scan using properties_pkey on properties

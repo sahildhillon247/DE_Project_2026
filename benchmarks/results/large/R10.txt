@@ -1,0 +1,51 @@
+=== R10 run 1 ===
+Hash Join  (cost=8.32..12.22 rows=1 width=67) (actual time=0.681..0.694 rows=1.00 loops=1)
+  Hash Cond: (b.builder_id = p.builder_id)
+  Buffers: shared hit=2 read=3
+  ->  Seq Scan on builders b  (cost=0.00..3.50 rows=150 width=28) (actual time=0.004..0.010 rows=150.00 loops=1)
+        Buffers: shared hit=2
+  ->  Hash  (cost=8.30..8.30 rows=1 width=47) (actual time=0.663..0.663 rows=1.00 loops=1)
+        Buckets: 1024  Batches: 1  Memory Usage: 9kB
+        Buffers: shared read=3
+        ->  Index Scan using projects_rera_id_key on projects p  (cost=0.29..8.30 rows=1 width=47) (actual time=0.656..0.656 rows=1.00 loops=1)
+              Index Cond: ((rera_id)::text = 'TS-RERA-PR-11726342'::text)
+              Index Searches: 1
+              Buffers: shared read=3
+Planning:
+  Buffers: shared hit=241 read=10
+Planning Time: 0.919 ms
+Execution Time: 0.739 ms
+=== R10 run 2 ===
+Hash Join  (cost=8.32..12.22 rows=1 width=67) (actual time=0.040..0.053 rows=1.00 loops=1)
+  Hash Cond: (b.builder_id = p.builder_id)
+  Buffers: shared hit=5
+  ->  Seq Scan on builders b  (cost=0.00..3.50 rows=150 width=28) (actual time=0.004..0.011 rows=150.00 loops=1)
+        Buffers: shared hit=2
+  ->  Hash  (cost=8.30..8.30 rows=1 width=47) (actual time=0.022..0.023 rows=1.00 loops=1)
+        Buckets: 1024  Batches: 1  Memory Usage: 9kB
+        Buffers: shared hit=3
+        ->  Index Scan using projects_rera_id_key on projects p  (cost=0.29..8.30 rows=1 width=47) (actual time=0.017..0.017 rows=1.00 loops=1)
+              Index Cond: ((rera_id)::text = 'TS-RERA-PR-11726342'::text)
+              Index Searches: 1
+              Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=251
+Planning Time: 0.748 ms
+Execution Time: 0.097 ms
+=== R10 run 3 ===
+Hash Join  (cost=8.32..12.22 rows=1 width=67) (actual time=0.038..0.051 rows=1.00 loops=1)
+  Hash Cond: (b.builder_id = p.builder_id)
+  Buffers: shared hit=5
+  ->  Seq Scan on builders b  (cost=0.00..3.50 rows=150 width=28) (actual time=0.004..0.011 rows=150.00 loops=1)
+        Buffers: shared hit=2
+  ->  Hash  (cost=8.30..8.30 rows=1 width=47) (actual time=0.022..0.022 rows=1.00 loops=1)
+        Buckets: 1024  Batches: 1  Memory Usage: 9kB
+        Buffers: shared hit=3
+        ->  Index Scan using projects_rera_id_key on projects p  (cost=0.29..8.30 rows=1 width=47) (actual time=0.016..0.017 rows=1.00 loops=1)
+              Index Cond: ((rera_id)::text = 'TS-RERA-PR-11726342'::text)
+              Index Searches: 1
+              Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=251
+Planning Time: 0.709 ms
+Execution Time: 0.114 ms

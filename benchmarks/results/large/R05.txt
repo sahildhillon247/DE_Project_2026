@@ -1,0 +1,48 @@
+=== R05 run 1 ===
+Limit  (cost=1000.42..5271.69 rows=200 width=30) (actual time=0.201..9.280 rows=200.00 loops=1)
+  Buffers: shared hit=672 read=2134
+  ->  Gather  (cost=1000.42..34636.60 rows=1575 width=30) (actual time=0.200..9.266 rows=200.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=672 read=2134
+        ->  Parallel Index Scan using idx_properties_active_posted_at on properties  (cost=0.42..33479.10 rows=656 width=30) (actual time=0.147..5.602 rows=145.00 loops=3)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text))
+              Rows Removed by Filter: 6572
+              Index Searches: 1
+              Buffers: shared hit=672 read=2134
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.815 ms
+Execution Time: 9.312 ms
+=== R05 run 2 ===
+Limit  (cost=1000.42..5271.69 rows=200 width=30) (actual time=0.144..6.019 rows=200.00 loops=1)
+  Buffers: shared hit=2382
+  ->  Gather  (cost=1000.42..34636.60 rows=1575 width=30) (actual time=0.144..6.005 rows=200.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=2382
+        ->  Parallel Index Scan using idx_properties_active_posted_at on properties  (cost=0.42..33479.10 rows=656 width=30) (actual time=0.040..2.877 rows=118.00 loops=3)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text))
+              Rows Removed by Filter: 5610
+              Index Searches: 1
+              Buffers: shared hit=2382
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.800 ms
+Execution Time: 6.048 ms
+=== R05 run 3 ===
+Limit  (cost=1000.42..5271.69 rows=200 width=30) (actual time=0.158..5.972 rows=200.00 loops=1)
+  Buffers: shared hit=2464
+  ->  Gather  (cost=1000.42..34636.60 rows=1575 width=30) (actual time=0.157..5.959 rows=200.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=2464
+        ->  Parallel Index Scan using idx_properties_active_posted_at on properties  (cost=0.42..33479.10 rows=656 width=30) (actual time=0.040..2.910 rows=124.33 loops=3)
+              Filter: ((latitude >= 12.90) AND (latitude <= 13.00) AND (longitude >= 77.55) AND (longitude <= 77.65) AND ((listing_type)::text = 'RENT'::text))
+              Rows Removed by Filter: 5798
+              Index Searches: 1
+              Buffers: shared hit=2464
+Planning:
+  Buffers: shared hit=268
+Planning Time: 1.022 ms
+Execution Time: 6.001 ms

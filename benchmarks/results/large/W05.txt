@@ -1,0 +1,54 @@
+=== W05 run 1 ===
+Update on properties  (cost=16.94..24.96 rows=0 width=0) (actual time=1.003..1.003 rows=0.00 loops=1)
+  Buffers: shared hit=66 read=24 dirtied=11 written=24
+  InitPlan 1
+    ->  Aggregate  (cost=16.50..16.51 rows=1 width=4) (actual time=0.154..0.154 rows=1.00 loops=1)
+          Buffers: shared hit=6 read=6 dirtied=5 written=6
+          ->  Index Scan using idx_properties_owner_status_type on properties properties_1  (cost=0.43..16.50 rows=3 width=4) (actual time=0.049..0.148 rows=7.00 loops=1)
+                Index Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                Index Searches: 1
+                Buffers: shared hit=6 read=6 dirtied=5 written=6
+  ->  Index Scan using properties_pkey on properties  (cost=0.43..8.45 rows=1 width=124) (actual time=0.186..0.189 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=11 read=8 dirtied=5 written=8
+Planning:
+  Buffers: shared hit=228 read=46 written=45
+Planning Time: 4.534 ms
+Execution Time: 1.416 ms
+=== W05 run 2 ===
+Update on properties  (cost=16.94..24.96 rows=0 width=0) (actual time=0.362..0.363 rows=0.00 loops=1)
+  Buffers: shared hit=90
+  InitPlan 1
+    ->  Aggregate  (cost=16.50..16.51 rows=1 width=4) (actual time=0.039..0.039 rows=1.00 loops=1)
+          Buffers: shared hit=12
+          ->  Index Scan using idx_properties_owner_status_type on properties properties_1  (cost=0.43..16.50 rows=3 width=4) (actual time=0.016..0.034 rows=7.00 loops=1)
+                Index Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                Index Searches: 1
+                Buffers: shared hit=12
+  ->  Index Scan using properties_pkey on properties  (cost=0.43..8.45 rows=1 width=124) (actual time=0.054..0.056 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=19
+Planning:
+  Buffers: shared hit=274
+Planning Time: 0.872 ms
+Execution Time: 0.452 ms
+=== W05 run 3 ===
+Update on properties  (cost=16.94..24.96 rows=0 width=0) (actual time=0.389..0.389 rows=0.00 loops=1)
+  Buffers: shared hit=90
+  InitPlan 1
+    ->  Aggregate  (cost=16.50..16.51 rows=1 width=4) (actual time=0.045..0.045 rows=1.00 loops=1)
+          Buffers: shared hit=12
+          ->  Index Scan using idx_properties_owner_status_type on properties properties_1  (cost=0.43..16.50 rows=3 width=4) (actual time=0.019..0.040 rows=7.00 loops=1)
+                Index Cond: ((listed_by = 1033) AND ((status)::text = 'ACTIVE'::text) AND ((listing_type)::text = 'RENT'::text))
+                Index Searches: 1
+                Buffers: shared hit=12
+  ->  Index Scan using properties_pkey on properties  (cost=0.43..8.45 rows=1 width=124) (actual time=0.066..0.069 rows=1.00 loops=1)
+        Index Cond: (property_id = (InitPlan 1).col1)
+        Index Searches: 1
+        Buffers: shared hit=19
+Planning:
+  Buffers: shared hit=274
+Planning Time: 0.946 ms
+Execution Time: 0.488 ms

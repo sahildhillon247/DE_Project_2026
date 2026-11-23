@@ -1,0 +1,54 @@
+=== R18 run 1 ===
+Sort  (cost=113848.78..114043.71 rows=77969 width=29) (actual time=944.734..944.780 rows=1264.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 108kB
+  Buffers: shared hit=2419 read=49935, temp read=6103 written=9121
+  ->  HashAggregate  (cost=94111.65..105648.06 rows=77969 width=29) (actual time=615.610..944.520 rows=1264.00 loops=1)
+        Group Key: listed_by, locality_id, carpet_area_sqft, floor_no, bhk
+        Filter: (count(*) > 1)
+        Planned Partitions: 4  Batches: 21  Memory Usage: 9785kB  Disk Usage: 32208kB
+        Rows Removed by Filter: 734194
+        Buffers: shared hit=2416 read=49935, temp read=6103 written=9121
+        ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.42..33938.44 rows=734940 width=21) (actual time=0.022..247.987 rows=736722.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2416 read=49935
+Planning:
+  Buffers: shared hit=290 read=31
+Planning Time: 1.453 ms
+Execution Time: 948.857 ms
+=== R18 run 2 ===
+Sort  (cost=113848.78..114043.71 rows=77969 width=29) (actual time=934.122..934.166 rows=1264.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 108kB
+  Buffers: shared hit=2409 read=49945, temp read=6103 written=9121
+  ->  HashAggregate  (cost=94111.65..105648.06 rows=77969 width=29) (actual time=606.330..933.901 rows=1264.00 loops=1)
+        Group Key: listed_by, locality_id, carpet_area_sqft, floor_no, bhk
+        Filter: (count(*) > 1)
+        Planned Partitions: 4  Batches: 21  Memory Usage: 9785kB  Disk Usage: 32208kB
+        Rows Removed by Filter: 734194
+        Buffers: shared hit=2406 read=49945, temp read=6103 written=9121
+        ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.42..33938.44 rows=734940 width=21) (actual time=0.031..253.200 rows=736722.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2406 read=49945
+Planning:
+  Buffers: shared hit=275 read=46
+Planning Time: 1.610 ms
+Execution Time: 938.370 ms
+=== R18 run 3 ===
+Sort  (cost=113848.78..114043.71 rows=77969 width=29) (actual time=949.064..949.109 rows=1264.00 loops=1)
+  Sort Key: (count(*)) DESC
+  Sort Method: quicksort  Memory: 108kB
+  Buffers: shared hit=2406 read=49948, temp read=6103 written=9121
+  ->  HashAggregate  (cost=94111.65..105648.06 rows=77969 width=29) (actual time=608.358..948.854 rows=1264.00 loops=1)
+        Group Key: listed_by, locality_id, carpet_area_sqft, floor_no, bhk
+        Filter: (count(*) > 1)
+        Planned Partitions: 4  Batches: 21  Memory Usage: 9785kB  Disk Usage: 32208kB
+        Rows Removed by Filter: 734194
+        Buffers: shared hit=2403 read=49948, temp read=6103 written=9121
+        ->  Index Scan using idx_properties_active_posted_at on properties  (cost=0.42..33938.44 rows=734940 width=21) (actual time=0.027..250.560 rows=736722.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2403 read=49948
+Planning:
+  Buffers: shared hit=275 read=46
+Planning Time: 1.428 ms
+Execution Time: 953.341 ms
